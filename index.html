@@ -5,15 +5,16 @@
     <meta name="description" content="Incremental Mass Rewritten made by MrRedShark77" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mrredshark77.github.io/imr-inf/" />
-    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.8 pt 1" />
-    <meta property="og:description" content="Incremental Mass Rewritten: New Path Reloaded made by Seder3214." />
-    <meta property="og:image" content="https://seder3214.github.io/imr-inf//images/thumbnail.jpg" />
+    <meta property="og:url" content="https://mrredshark77.github.io/incremental-mass-rewritten/" />
+    <meta property="og:title" content="Incremental Mass Rewritten v0.7" />
+    <meta property="og:description" content="Incremental Mass Rewritten made by MrRedShark77." />
+    <meta property="og:image" content="https://mrredshark77.github.io/incremental-mass-rewritten//images/thumbail.jpg" />
 
-    <link rel="image_src" href="images/thumbnail.jpg">
+    <link rel="image_src" href="images/thumbail.jpg">
     <link rel="icon" href="images/mass.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tooltip.css">
+    <link rel="manifest" crossorigin="use-credentials" href="manifest.json"/>
 
     <script src="js/iconify-icon.min.js"></script>
     <script src="js/break_eternity.js"></script>
@@ -24,18 +25,13 @@
     <script src="js/other.js"></script>
     <script src="js/saves.js"></script>
     <script src="js/challenges.js"></script>
+    <script src="js/buildings.js"></script>
     <script src="js/debug.js"></script>
 
-    <script src="js/multiverse/circle.js"></script>
-
-    <script src="js/galaxy/galaxy.js"></script>
-    <script src="js/galaxy/grading.js"></script>
-
-    <script src="js/ascensions.js"></script>
-    <script src="js/infinity/orb.js"></script>
     <script src="js/infinity/core.js"></script>
     <script src="js/infinity/inf.js"></script>
-    <script src="js/beyond_pres.js"></script>
+    <script src="js/infinity/corrupted_star.js"></script>
+
     <script src="js/darkness/exotic_atoms.js"></script>
     <script src="js/darkness/c16.js"></script>
     <script src="js/darkness/matter.js"></script>
@@ -62,6 +58,7 @@
     <script src="js/tabs.js"></script>
     <script src="js/scaling.js"></script>
     <script src="js/upgrades.js"></script>
+    <script src="js/ascensions.js"></script>
     <script src="js/ranks.js"></script>
     <script src="js/temp.js"></script>
 
@@ -73,7 +70,7 @@
     <script src="js/tooltip_res.js"></script>
     <script src="js/main.js"></script>
 
-    <title>Incremental Mass Rewritten: New Path Reloaded</title>
+    <title>Incremental Mass Rewritten</title>
 </head>
 <body onload="loadGame()">
     <input id="copy" style="position: absolute; top: 0; left: 0; user-select: all; visibility: hidden;">
@@ -104,12 +101,9 @@
             <button class="btn" onclick="infButton()">Get Infinity Theorem</button>
         </div>
     </div>
-    <div id="gal_popup" style='display: none;'>
-    </div>
     <div id='app' style='display: none;'>
         <div id="star"></div>
         <div class="table_center" style="height: 100%; width: 100%;">
-            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.8 pt 1 | Player Name: <span id='playerName'></span></div>
             <div id="tabs">
             </div>
             <div id="main_app" style="width: calc(100% - 450px); height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;">
@@ -121,7 +115,7 @@
                     <div id="chal_upper"></div>
                 </div>
                 <div class="main-line"></div>
-                <div id="stabs_div" style="min-height: 55px;">
+                <div id="stabs_div" style="min-height: 45px;">
                     <div id="stabs"></div>
                 </div><br>
                 <div id="tab_frames">
@@ -159,7 +153,9 @@
                                     </div>
                                 </div><div class="table_center">
                                     <div class="w_boson sub_b">
-                                        <span id="w_boson1">You have <span id="pos_w_amt">X</span> W<sup>+</sup> Boson, which <span id="changeEff">0</span> Mass gain by <span id="pos_w_eff0">Y</span>,<br> multiply W<sup>-</sup> Boson gain by <span id="pos_w_eff1">Y</span></span>
+                                        <span id="w_boson1">
+                                            You have <span id="pos_w_amt">X</span> W<sup>+</sup> Boson, which multiply Mass gain by <span id="pos_w_eff0">Y</span>,<br> multiply W<sup>-</sup> Boson gain by <span id="pos_w_eff1">Y</span><span id="pos_w_eff2">Z</span>
+                                        </span>
                                         <br><br>
                                         You have <span id="neg_w_amt">X</span> W<sup>-</sup> Boson, which make Mass gain softcap^2 starts ^<span id="neg_w_eff0">Y</span> later,<br> multiply W<sup>+</sup> Boson gain by <span id="neg_w_eff1">Y</span>
                                     </div>
@@ -188,13 +184,13 @@
                         </div>
                     </div><div id="tab_frame0">
                         <div id="stab_frame0_0">
-                            <div id="rank_tabs" class="table_center" style="min-height: 55px;">
+                            <div id="rank_tabs" class="table_center stab_btn" style="min-height: 55px;">
                                 <div style="width: 145px">
                                     <button onclick="tmp.rank_tab = 0" class="btn_tab">Ranks</button>
                                 </div><div style="width: 145px">
                                     <button onclick="tmp.rank_tab = 1" class="btn_tab">Prestiges</button>
-                                </div><div style="width: 145px" id="asc_btn">
-                                    <button onclick="tmp.rank_tab = 2" class="btn_tab">Ascensions</button>
+                                </div><div style="width: 145px">
+                                    <button onclick="tmp.rank_tab = 2" class="btn_tab" id="asc_btn">Ascensions</button>
                                 </div>
                             </div>
                             <div id="rank_tab0">
@@ -216,72 +212,45 @@
                                         </button>
                                     </div>
                                 </div>
+                                <br><br>
+                                <div>
+                                    <div id="building_mass_1"></div>
+                                    <div id="building_mass_2"></div>
+                                    <div id="building_mass_3"></div>
+                                    <div id="building_mass_4"></div>
+                                </div><br><br>
+                                <div id="building_tickspeed"></div>
+                                <div id="building_accelerator"></div>
+                                <br><div>
+                                    <span id="massSoft1" class="red">After <b id="massSoftStart1">X</b> of mass gain, mass gain will be softcapped!<br></span>
+                                    <span id="massSoft3" style="color: rgb(121, 0, 0)">After <b id="massSoftStart3">X</b> of mass gain will softcap^2 mass gain!<br></span>
+                                    <span id="massSoft4" style="color: rgb(122, 0, 86)">After <b id="massSoftStart4">X</b> of mass gain will softcap^3 mass gain!<br></span>
+                                    <span id="massSoft5" style="color: rgb(255, 94, 0)">After <b id="massSoftStart5">X</b> of mass gain will softcap^4 mass gain!<br></span>
+                                    <span id="massSoft6" style="color: rgb(255, 238, 0)">After <b id="massSoftStart6">X</b> of mass gain will softcap^5 mass gain!<br></span>
+                                    <span id="massSoft7" style="color: rgb(166, 255, 0)">After <b id="massSoftStart7">X</b> of mass gain will softcap^6 mass gain!<br></span>
+                                    <span id="massSoft8" style="color: rgb(0, 255, 149)">After <b id="massSoftStart8">X</b> of mass gain will softcap^7 mass gain!<br></span>
+                                    <span id="massSoft9" style="color: rgb(0, 225, 255)">After <b id="massSoftStart9">X</b> of mass gain will softcap^8 mass gain!</span>
+                                    <div id="massOverflow"></div>
+                                    <div id="massOverflow2" style="color: rgb(255, 197, 215)"></div>
+                                    <div id="strongerOverflow"></div>
+                                    <div id="strongerOverflow2" style="color: rgb(255, 197, 215)"></div>
+                                    <div id="rankCollapse"></div>
+                                </div>
                             </div><div id="rank_tab1">
-                                Your Prestige base is <h4 id="pres_base"></h4> (based on product of Rank tiers)<br><br>
-                                <div class="table_center" style="min-height: 180px;">
-                                <div style="width: 400px; display: none;" id="pre_beyond_pres"></div>
-                                <div id="pres_table" class="table_center"></div>
-                                <div style="width: 400px; display: none;" id="beyond_pres">
-                                    <div class="table_center" style="align-items: center;">
-                                        <button id="bp_auto" class="btn" style="width: 80px;" onclick="BEYOND_PRES.autoSwitch()">OFF</button>
-                                        <div style="margin-left: 5px; text-align: left;" id="bp_amt">
-                                            Merit 0
-                                        </div>
+                                Your Prestige base is <span id="pres_base"></span> (based on product of Rank tiers+1)<br><br>
+                                <div id="pres_table" class="table_center" style="min-height: 180px;"></div>
+                                <br><br>
+                                <div id="galactic_prestige_div">
+                                    <div>
+                                        <span id="gal_prestige_scale"></span>Galactic Prestige <h4 id="gal_prestige">0</h4><br>
+                                        <button id="gp_btn" class="btn galactic" onclick="GAL_PRESTIGE.reset()">Reset Supernova for that what do you mean?</button>
                                     </div>
-                                <br>
-                                <button onclick="BEYOND_PRES.reset()" class="btn reset" style="max-width: 380px;" id="bp_desc">
-                                    Reset your Valors (and force a infinity reset) but Merit/Excellence/Royalty etc. up.<br>
-                                    To Merit up, require Valor ???<br>
-                                    To Excellence up, require Merit ???
-                                </button>
-                            </div></div></div><div id="rank_tab2">
-                                Your Ascension base is <h4 id="asc_base"></h4> (based on product of ln[Prestige tiers+1]+1)<br><br>
+                                    <br>
+                                    <div id="gp_rewards"></div>
+                                </div>
+                            </div><div id="rank_tab2">
+                                Your Ascension base is <span id="asc_base"></span> (based on product of ln[Prestige tiers+1]<sup id="asc_texp"></sup>+1)<br><br>
                                 <div id="asc_table" class="table_center" style="min-height: 180px;"></div>
-                            </div>
-                            <br><br>
-                            <div id="mass_upgs_table"></div><br><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="tickspeed_div">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/tickspeed.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="tickspeed_scale"></span>Tickspeeds [<span id="tickspeed_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="tickspeed_btn" class="btn" style="width: 300px;" onclick="FORMS.tickspeed.buy()">Cost: <span id="tickspeed_cost">X</span> Rage Power</button>
-                                <button class="btn" style="width: 120px;" onclick="FORMS.tickspeed.buyMax()">Buy Max</button>
-                                <button id="tickspeed_auto" class="btn" style="width: 80px;" onclick="FORMS.tickspeed.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-			<b>Effect: <span id="tickspeed_eff">X</span> to Mass gain</b><br><span style='font-size: 11px'>(Power: <span id="tickspeed_step">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div><div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="accel_div">
-                                
-                                <div style="width: 300px">
-                                    
-                                    <div class="resources">
-                                        <img src="images/accelerator.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="accel_scale"></span>Accelerators [<span id="accel_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="accel_btn" class="btn" style="width: 300px;" onclick="FORMS.accel.buy()">Cost: <span id="accel_cost">X</span> Rage Power</button>
-                                <button class="btn" style="width: 120px;" onclick="FORMS.accel.buyMax()">Buy Max</button>
-                                <button id="accel_auto" class="btn" style="width: 80px;" onclick="FORMS.accel.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="accel_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="accel_step">X</span>)</b>
-                                </div>
-                            </div><br><div>
-                                <span id="massSoft1" class="red">After <b id="massSoftStart1">X</b> of mass gain, mass gain will be softcapped!<br></span>
-                                <span id="massSoft3" style="color: rgb(121, 0, 0)">After <b id="massSoftStart3">X</b> of mass gain will softcap^2 mass gain!<br></span>
-                                <span id="massSoft4" style="color: rgb(122, 0, 86)">After <b id="massSoftStart4">X</b> of mass gain will softcap^3 mass gain!<br></span>
-                                <span id="massSoft5" style="color: rgb(255, 94, 0)">After <b id="massSoftStart5">X</b> of mass gain will softcap^4 mass gain!<br></span>
-                                <span id="massSoft6" style="color: rgb(255, 238, 0)">After <b id="massSoftStart6">X</b> of mass gain will softcap^5 mass gain!<br></span>
-                                <span id="massSoft7" style="color: rgb(166, 255, 0)">After <b id="massSoftStart7">X</b> of mass gain will softcap^6 mass gain!<br></span>
-                                <span id="massSoft8" style="color: rgb(0, 255, 149)">After <b id="massSoftStart8">X</b> of mass gain will softcap^7 mass gain!<br></span>
-                                <span id="massSoft9" style="color: rgb(0, 225, 255)">After <b id="massSoftStart9">X</b> of mass gain will softcap^8 mass gain!</span>
-                                <div id="massOverflow"></div>
-                                <div id="massOverflow2" style="color: rgb(255, 197, 215)"></div>
-                                <div id="massOverflow3" style="color: rgb(248, 156, 185)"></div>
-                                <div id="massOverflow4" style="color: rgb(243, 109, 151)"></div><br>
-                                <span id='br_broke' style="color: rgb(252, 16, 90)">X</span>
-                                <div id="strongerOverflow"></div>
-                                <div id="strongerOverflow2" style="color: rgb(255, 197, 215)"></div>
                             </div>
                         </div><div id="stab_frame0_1">
                             <div class="table_center">
@@ -296,140 +265,63 @@
                                 </div>
                             </div>
                             <br><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/bhCondenser.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="bhCondenser_scale"></span>Black Hole Condensers [<span id="bhCondenser_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="bhCondenser_btn" class="btn" style="width: 300px;" onclick="FORMS.bh.condenser.buy()">Cost: <span id="bhCondenser_cost">X</span> Dark Matters</button>
-                                <button class="btn" style="width: 120px;" onclick="FORMS.bh.condenser.buyMax()">Buy Max</button>
-                                <button id="bhCondenser_auto" class="btn" style="width: 80px;" onclick="FORMS.bh.condenser.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="bhCondenser_pow">X</span> to mass of black hole</b><hr style='width: 75px;'>
-                                </div>
-                            </div><div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="falseVacuumDiv">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/fvm.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="fvm_scale"></span>False Vacuum Manipulators [<span id="fvm_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="fvm_btn" class="btn" style="width: 300px;" onclick="UNSTABLE_BH.fvm.buy()">Cost: <span id="fvm_cost">X</span> Dark Matters in C16</button>
-                                <button class="btn" style="width: 120px;" onclick="UNSTABLE_BH.fvm.buyMax()">Buy Max</button>
-                                <button id="fvm_auto" class="btn" style="width: 80px;" onclick="player.bh.autoFVM = !player.bh.autoFVM">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                         <b>Effect: <span id="fvm_eff">X</span> to Unstable BH production speed</b> <br><span style='font-size: 11px'>(Power: <span id="fvm_pow">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div><br><div>
+                            <div id="building_bhc"></div>
+                            <div id="building_fvm"></div>
+                            <br><div>
                                 <span id="massSoft2" class="red">After <b id="massSoftStart2">X</b> of mass gain from black hole, its mass gain will be softcapped!</span><br>
                                 <span id="bhFSoft1" class="red">
                                     The formula (x + 1)<sup id="bhMassPower2">0.33</sup> softcaps at <b id="bhFSoftStart1">X</b>
                                 </span><br>
                                 <span id="bhOverflow"></span>
                                 <div id="bhOverflow2" style="color: rgb(255, 197, 215)"></div>
-                                <div id="bhOverflow3" style="color: rgb(248, 156, 185)"></div>
+                                <br><div id="bhcEffectOverflow" style="color: rgb(194, 177, 255)"></div>
                             </div>
                         </div><div id="stab_frame0_2">
                             You have <h4 id="atomicAmt">X</h4> Atomic Power<br>
                             <span class="green">Which provides <h4 id="atomicEff">X</h4> free Tickspeeds</span><br><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/gamma_ray.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="gamma_ray_scale"></span>Cosmic Rays [<span id="gamma_ray_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="gamma_ray_btn" class="btn" style="width: 300px;" onclick="ATOM.gamma_ray.buy()">Cost: <span id="gamma_ray_cost">X</span> Atoms</button>
-                                <button class="btn" style="width: 120px;" onclick="ATOM.gamma_ray.buyMax()">Buy Max</button>
-                                <button id="gamma_ray_auto" class="btn" style="width: 80px;" onclick="player.atom.auto_gr = !player.atom.auto_gr">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="gamma_ray_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="gamma_ray_pow">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div><br><div>
+                            <div id="building_cosmic_ray"></div><br><div>
                                 <span id="atomicOverflow"></span>
                             </div>
                         </div><div id="stab_frame0_3">
                             You collapsed <h4 id="stars_Amt">X</h4> stars, which multiplies mass gain based on all rank types.<br>
-                            <span class="green">Currently: <h4 id="stars_Eff">X</h4></span><br><br>
-                            <span id="stars_Gal"></span><br>
-                            <button id="star_btn" class="btn" onclick="STARS.generators.unl()">X</button><br><br>
+                            <span class="green">Currently: <span id="stars_Eff">X</span></span><br><br>
+                            <button id="star_btn" class="btn" onclick="STARS.generators.unl()">X</button>
+                            <br><br>
                             <div id="stars_table" class="table_center"></div><br><br>
+                            <div id="building_star_booster"></div><br><br>
                             <span id="starSoft1" class="red">After <b id="starSoftStart1">X</b> Collapsed stars gain, Collapsed stars gain will be softcap!</span><br>
+                            <div id="starSiltation" style="color: rgb(194, 177, 255)"></div>
                         </div><div id="stab_frame0_4">
                             You have <h4 id="bpAmt">0</h4> Blueprint Particles<br>
                             <span class="green">Which increases pre-Quantum global speed by <h4 id="bpEff">1</h4>x</span><br><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/cosmic_string.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="cosmic_str_scale"></span>Cosmic Strings [<span id="cosmic_str_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="cosmic_str_btn" class="btn" style="width: 300px;" onclick="QUANTUM.cosmic_str.buy()">Cost: <span id="cosmic_str_cost">X</span> Quantum Foam</button>
-                                <button class="btn" style="width: 120px;" onclick="QUANTUM.cosmic_str.buyMax()">Buy Max</button>
-                                <button id="cosmic_str_auto" class="btn" style="width: 80px;" onclick="player.qu.auto_cr = !player.qu.auto_cr">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="cosmic_str_eff">X</span> to blueprint particles</b><br><span style='font-size: 11px'>(Power: <span id="cosmic_str_pow">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div>
+                            <div id="building_cosmic_string"></div>
                         </div><div id="stab_frame0_5">
                             You have <h4 id="dim_mass">X</h4> of dimensional mass
                             <div class="green">Which boosts meta-score of equipped theorems by <h4 id="dim_mass_eff">X</h4></div>
                             <br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/pe.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="pe_scale"></span>Parallel Extruder [<span id="pe_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="pe_btn" class="btn" style="width: 300px;" onclick="INF.pe.buy()">Cost: <span id="pe_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.pe.buyMax()">Buy Max</button>
-                                <button id="pe_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="pe_eff">X</span> to dimensional mass gain</b><br><span style='font-size: 11px'>(Power: <span id="pe_step">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div>
-                        </div><div id="stab_frame0_6">
-                        <div id='am_mass_div'><br>
-                            You have <h4 id="am_mass">X</h4> of Anti-Matter<br>
-                            <div class="green">Boosting 7th Pion effect by <h4 id="am_mass_eff">X</h4></div><br>
-                        </div><br>
-                        <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="am_div">
-                            <div style="width: 300px">
-                                <div class="resources">
-                                    <img src="images/am.png">
-                                    <span style="margin-left: 5px; text-align: left;"><span id="am_scale"></span>Antimatter Generator [<span id="am_lvl">X</span>]</span>
-                                </div>
-                            </div><button id="am_btn" class="btn" style="width: 300px;" onclick="DARK.am.buy()">Cost: <span id="am_cost">X</span> Antimatter</button>
-                            <button class="btn" style="width: 120px;" onclick="DARK.am.buyMax()">Buy Max</button>
-                            <button id="am_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                            <div style="margin-left: 5px; text-align: center; width: 400px">
-                                <b>Effect: <span id="am_eff">X</span> to Antimatter gain</b><br><span style='font-size: 11px'>(Power: <span id="am_step">X</span>)</b><hr style='width: 75px;'>
-                            </div>
-                        </div></div><div id="stab_frame0_7">
-                            <div id="mv_upgs_table"></div><br><br>
+                            <div id="building_pe"></div>
                         </div>
                     </div><div id="tab_frame1">
                         <div id="stab_frame1_0">
-                            <div id="ranks_reward_btn" class="table_center"></div><br>
+                            <div id="ranks_reward_btn" class="table_center stab_btn"></div><br>
                             <div id="ranks_rewards_table"></div>
                         </div><div id="stab_frame1_1">
-                            <div id="scaling_btn" class="table_center"></div><br>
+                            <div id="scaling_btn" class="table_center stab_btn"></div><br>
                             <div id="scaling_table"></div>
                         </div><div id="stab_frame1_2">
-                            <div id="pres_reward_btn" class="table_center"></div><br>
+                            <div id="pres_reward_btn" class="table_center stab_btn"></div><br>
                             <div id="pres_rewards_table"></div>
                         </div><div id="stab_frame1_3">
                             <div id="br_rewards_table"></div>
                         </div><div id="stab_frame1_4">
-                            <div id="asc_reward_btn" class="table_center"></div><br>
+                            <div id="asc_reward_btn" class="table_center stab_btn"></div><br>
                             <div id="asc_rewards_table"></div>
                         </div>
-                            <div id="stab_frame1_5">
-                                <div id="bp_rewards_table"></div>
-                            </div>
+                    </div><div id="tab_frame2">
+                        <div id="stab_frame2_0">
+                            <div id="main_upg_msg" style="min-height: 100px;"></div>
+                            <div id="main_upgs_table" class="table_center"></div>
                         </div>
-                    <div id="tab_frame2">
-                        <div id="main_upg_msg" style="min-height: 100px;"></div>
-                        <div id="main_upgs_table" class="table_center"></div>
                     </div><div id="tab_frame3">
                         <div id="stab_frame3_0">
                             Note: Click any image to show challenge description. Click again to enter any challenge<br><br>
@@ -512,9 +404,8 @@
                             <button onclick="MASS_DILATION.break.toggle()" id="bd_btn" class="btn half_full bd tooltip"
                             tooltip-html="When breaking dilation, while in Big Rip, BH Condensers & Cosmic Rays are no longer nerfed by 8th QC modifier, 7th QC modifier is disabled, you can gain <b>Relativistic Energy</b> based on dilated mass. Relativistic Energy generates <b>Relativistic Mass</b>. Fixing Dilation resets your relativistic energy & its mass, also forces a Quantum reset.">Break Dilation</button><br><br>
                             <div class="table_center">
-                                <div id="bd_upg_table" class="table_center" style="width: 1000px;"></div><br>
-                            </div><br>
-                            <span id="bdSoft1" class="red">After <b id="bdSoftStart1">X</b> of Relativistic mass gain will softcap Relativistic mass gain!</span>
+                                <div id="bd_upg_table" class="table_center" style="width: 1000px;"></div>
+                            </div>
                         </div><div id="stab_frame4_4">
                             <button class="btn half_full tooltip" id="mcf_btn" tooltip-html="Tiering will result in forcing FSS reset." onclick="EXOTIC_ATOM.tier()">
                                 Muon-Catalyzed Fusion Tier 0<br>
@@ -523,6 +414,8 @@
                             <div id="ea_div">
                                 <br>
                                 <div>You have <h4 id="ext_atom">0</h4> Exotic Atoms (Based on Kaon & Pion).</div>
+                                <div>Reward Strength: <span id="ea_strength">100%</span></div>
+                                <br>
                                 <div class="table_center">
                                     <div style="width: 50%; min-width: 500px;">
                                         You have <span id="ea_amt0">0</span> Kaons.<br><br>
@@ -594,7 +487,7 @@
                             <div id="FSS_eff2"></div><br>
                             <button onclick="darkRun()" class="btn half_full tooltip" id="dark_run_btn" tooltip-html="Dark Running will force a Dark reset, and will trap you into Big Rip with quantum challenge modifiers [8,8,8,8,8,8,8,8]. You will produce <b>Glyphic Mass</b> based on resources which nerf things, and choosing a glyph to earn will exit a Dark Run."></button>
                             <button class="btn half_full" onclick="player.dark.run.gmode = (player.dark.run.gmode+1)%3">Glyph Button Mode: <span id="mg_btn_mode">X</span></button>
-                            <button class="btn half_full" onclick="player.dark.run.glyphs = [0,0,0,0,0,0]">Clear all glyphs</button>
+                            <button class="btn half_full" onclick="player.dark.run.glyphs = [E(0),E(0),E(0),E(0),E(0),E(0)]">Clear all glyphs</button>
                             <br><br>
                             <div>
                                 <button class="btn" onclick="player.dark.run.gamount = 0">=0</button>
@@ -609,7 +502,7 @@
                             <div id="glyph_upg_msg"></div>
                         </div><div id="stab_frame7_2">
                             <div>
-                                10<sup>lg(lg(x))<sup id="matter_exponent">2</sup></sup> to each matter gain by previous matter.
+                                <span id="matter_formula">10<sup>lg(lg(x))<sup id="matter_exponent">2</sup></sup></span> to each matter gain by previous matter.
                                 <div id="matter_req_div">Tip: Reach <span id="matter_req">???</span> of current matter to unlock next matter!</div>
                                 <div id="FSS_eff1"></div><br>
                                 <button class="btn" onclick="buyMaxMatters()">Max All Upgrades</button>
@@ -636,17 +529,20 @@
                                 </div>
                                 -->
                             </div>
-                            <h2 class="tooltip" tooltip-html="Click any theorem to select. Selected theorem will be added in Inventory after going Infinity.">Theorem Selection</h2> (hover)
-                            <div id="pre_theorem" class="table_center"></div>
+                            <div id="pt_selector">
+                                <h2 class="tooltip" tooltip-html="Click any theorem to select. Selected theorem will be added in Inventory after going Infinity.">Theorem Selection</h2> (hover)
+                                <div id="pre_theorem" class="table_center"></div>
+                            </div>
                             Any Theorem's Level is <span id="pt_lvl" class="tooltip" tooltip-html="Based on normal mass, best mass of black hole in C16">???</span><br>
-                            Max Theorem's Level is <b><span id="maxLevel" class="tooltip" tooltip-html="Yeah, that's just a max theorem level you've ever got!">???</span></b><br>
                             <div class="table_center">
                                 <div style="width: 50%; min-width: 500px;">
                                     <h2>The Core</h2>
                                     <div id="theorem_table" class="table_center"></div>
                                     <i>[Note: 2 or more theorems of any type CANNOT fit in the Core at the same time]</i>
                                 </div><div style="width: 50%; min-width: 500px;">
-                                    <h2>Inventory</h2><br><button onclick="removeTheorem()">Remove selected theorem in inventory</button>
+                                    <h2>Inventory</h2><br>
+                                    <button onclick="removeTheorem()">Remove selected</button>
+                                    <button onclick="formTheorem()" id="formTBtn">Form selected into fragments</button>
                                     <div id="theorem_inv_table" class="table_center"></div>
                                 </div>
                             </div>
@@ -656,147 +552,27 @@
                             <p>You have <b id="ip_amt">???</b> Infinity Points. Hover any upgrade to see its description.</p>
                             <div id="inf_upg_table"></div>
                         </div><div id="stab_frame8_3">
-                            You have <h4 id="nm_base">X</h4> of Newton Fragments <div id='nm_base_boost_div'>
-                                That are boosted by <span id="nm_base_boost">0</span> based on Protoversal Fragments
-                            </div>
-                            <div class="green">Which boosts Overpower Power by <h4 id="nm_base_eff">X</h4></div>
-                            <br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/nm.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="nm_scale"></span>Newton Modificator [<span id="nm_lvl">X</span>]</span>
+                            <div class="table_center">
+                                <div style="width: 50%; min-width: 500px;">
+                                    You have <h4 id="cs_amount">0</h4> Corrupted Stars.<br>
+                                    The speed of the corrupted star is <b id="cs_speed">X</b>.
+                                    <br><br>
+                                    <div class="table_center">
+                                        <div><button id="cs_upg1" class="btn full" onclick="buyCSUpg(0)">X</button></div>
+                                        <div><button id="cs_upg2" class="btn full" onclick="buyCSUpg(1)">X</button></div>
                                     </div>
-                                </div><button id="nm_btn" class="btn" style="width: 300px;" onclick="INF.nm.buy()">Cost: <span id="nm_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.nm.buyMax()">Buy Max</button>
-                                <button id="nm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    <div style="margin-left: 5px; text-align: center; width: 400px">
-                                        <b>Effect: <span id="nm_eff">X</span> to Newton Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="nm_step">X</span>)</b><hr style='width: 75px;'>
-                                    </div>
-                                </div>
-                            </div><br>
-                            <div id='pm_base_div'>
-                                You have <h4 id="pm_base">X</h4> of Protoversal Fragments<br>  <div id='pm_base_boost_div'>
-                                    That are boosted by <span id="pm_base_boost">0</span> based on Dalton Fragments
-                                </div>
-                                <div class="green">Which boosts Corrupted Shards by <h4 id="pm_base_eff">X</h4></div><br>
-                            </div><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="pm_div">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/pm.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="pm_scale"></span>Protoversal Modificator [<span id="pm_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="pm_btn" class="btn" style="width: 300px;" onclick="INF.pm.buy()">Cost: <span id="pm_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.pm.buyMax()">Buy Max</button>
-                                <button id="pm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="pm_eff">X</span> to Protoversal Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="pm_step">X</span>)</b><hr style='width: 75px;'>
+                                    <br><br>
+                                    <div id="cs_overflow" style="color: red"></div>
+                                </div><div style="width: 50%; min-width: 500px;">
+                                    <h2>Corrupted Star Effects:</h2>
+                                    <div id="cs_effect" class="sky"></div>
                                 </div>
                             </div>
-                            <div id='dm_base_div'><br>
-                                You have <h4 id="dm_base">X</h4> of Dalton Fragments<br>
-                                That are boosted by <span id="dm_base_boost">0</span> based on Einstein Fragments
-                                <div class="green">Which boosts Kaons & Pions gains by <h4 id="dm_base_eff">X</h4></div><br>
-                            </div><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="dm_div">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/dalm.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="dm_scale"></span>Dalton Modificator [<span id="dm_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="dm_btn" class="btn" style="width: 300px;" onclick="INF.dm.buy()">Cost: <span id="dm_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.dm.buyMax()">Buy Max</button>
-                                <button id="dm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="dm_eff">X</span> to Dalton Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="dm_step">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div><br>
-                            <div id='em_base_div'>
-                                You have <h4 id="em_base">X</h4> of Einstein Fragments<br>  <div id='em_base_boost_div'>
-                                    That are boosted by <span id="em_base_boost">0</span> based on Hawking Fragments
-                                </div>
-                            </div><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="em_div">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/em.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="em_scale"></span>Einstein Modificator [<span id="em_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="em_btn" class="btn" style="width: 300px;" onclick="INF.em.buy()">Cost: <span id="em_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.em.buyMax()">Buy Max</button>
-                                <button id="em_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="em_eff">X</span> to Einstein Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="em_step">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div><br>
-                            <div id='hm_base_div'>
-                                You have <h4 id="hm_base">X</h4> of Hawking Fragments<br>  <div id='hm_base_boost_div'>
-                                    That are boosting infinity gain by <span id="hm_base_boost">0</span> based on Hawking Fragments.
-                                </div>
-                            </div><br>
-                            <div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="hm_div">
-                                <div style="width: 300px">
-                                    <div class="resources">
-                                        <img src="images/hm.png">
-                                        <span style="margin-left: 5px; text-align: left;"><span id="hm_scale"></span>Hawking Modificator [<span id="hm_lvl">X</span>]</span>
-                                    </div>
-                                </div><button id="hm_btn" class="btn" style="width: 300px;" onclick="INF.hm.buy()">Cost: <span id="hm_cost">X</span> Infinity Points</button>
-                                <button class="btn" style="width: 120px;" onclick="INF.hm.buyMax()">Buy Max</button>
-                                <button id="hm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Effect: <span id="hm_eff">X</span> to Hawking Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="hm_step">X</span>)</b><hr style='width: 75px;'>
-                                </div>
-                            </div>
-                        </div><div id="stab_frame8_4">
-                            You must purchase Orb of Creation upgrades outside C18!<br><br>
-                            <div class="table_center"><div class="table_center" id="orbUpgs_table" style="width: 1000px;"></div></div>
                         </div>
                     </div><div id="tab_frame9">
                         <div id="stab_frame9_0">
-                            You have <h4 id="stars_amt">0</h4>  <h4 id="stars_gain">0</h4> Galaxy Particles<br>
-                            <span class='green'>Which boosts all-star resources gain by ^<span id="stars_eff"></span></span><br>
-                             <button class="btn half_full tooltip" id="gen_btn" tooltip-html="Tiering will result in forcing Supernova Reset." onclick="GALAXY.tier()"></button><br>
-                         </div><div id="stab_frame9_1">
-                            You have <span id="grade_theorem">0</span> Unspent Gradings (based on Galaxy Particles)<br>
-                            (+1 at <span id="grade_next_theorem">X</span>)<br><br>
-                            <div id="grade_btns">
-                                <button class="btn" onclick="giveRandomPGrading(1)">Give a random Grading</button>
-                                <button class="btn" onclick="giveRandomPGrading(10)">Give 10 random Gradings</button>
-                                <button class="btn" onclick="giveRandomPGrading(1,true)">Give all random Gradings</button>
-                                <button class="btn" onclick="respecPGrading()">Respec all Gradings</button>
-                                <br><br>
-                            </div>
-                            <div id="grade_table"></div>
-                        </div>
-                    </div><div id="tab_frame10">
-                        <div id="stab_frame10_0">
-                            <div class="table_center"><div style="width: 50%; min-width: 500px;">
-                                You have compleled <h3  id="total"></h3> cycles in total. Completing <h3 id='addOrbit_req'></h3> cycles will add 1 orbit (Currently: <h3 id='currentCount'></h3> cycles completed).<br>
-                                <b class="circleText" style="font-size:20px">Current cycle time is <span id="cycleTime"></span>.</b><br>
-                                Completing the cycle will give you <b class='circleText' style="font-size:20px" id="cycleGain"></b> Multiversal Fragments.
-                                <div class='table_center' id="circle_upg_table"></div><br>
-                                You have <h3 class='circleText'id="orbitAmt"></h3> orbits.<br>
-                                Ring length: <h3 class='circleText' id="ringLength"></h3> (Durability: <h3 class='circleText' id='durability'></h3>, reducing on every cycle completion).<br>
-                                Core <h3 class='circleText'id="coreLvl"></h3> (To level up, complete <h3 class='circleText' id='coreLvl_req'></h3> cycles in total), that boosts the base of core effect.<br>
-                                Your core power is <h3 class='circleText'id="corePower"></h3>.<br>
-                                Note: Every boosting cicrle part are making the cycle time higher!
-                    </div>
-                    <div class='circleDebuff'style="width: 25%; min-width: 250px;">
-                        <h3>Portal Spell's Circle Debuffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is weakened by <h3 id="orbitNerf"></h3></span>.<br>(Based on Orbits)<br><hr style='width: 75px;'><span class="sky">Your circle's parts are boosting cycle time by +<h3 id="timeScale"></h3></span><br>(Based on Everyting)</span><br>
-            </div>
-            <div class='circleBuff'style="width: 25%; min-width: 250px;">
-                <h3>Portal Spell's Circle Buffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="ringEff"></h3></span><br>(Based on Ring Length.)<hr style='width: 75px;'>Note: If the ring durability reaches 0 - the effect will be useless<br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="coreEff"></h3></span><br>(Based on Core Level and Core Power)
-            </div>
-            <div>
-                <h3>Circle effects:</h3><br><span id="circleEffects"></span><br> (Note: This effects are boosted by current gain/cycle.)
-            </div></div>
-        </div></div><div id="tab_frame11">
-                        <div id="stab_frame11_0">
                             <button class="btn" onclick="save()">Save</button>
                             <button class="btn" onclick="createConfirm('Are you sure you want to RESET your progress to new game?','wipe',()=>wipe(true))">Hard Reset</button>
-                            <button class="btn" onclick="resetName()">Change Player Name</button>
                             <button class="btn" onclick="exporty()">Export</button>
                             <button class="btn" onclick="export_copy()">Export to clipboard</button>
                             <button class="btn" onclick="importy()">Import</button>
@@ -808,27 +584,21 @@
                             <button class="btn" onclick="createPopup(POPUP_GROUPS.notations.html,'notations')">Notations</button>
                             <button class="btn" id="tree_anim_btn" onclick="changeTreeAnimation()">Tree Animation: <span id="tree_anim">ON</span></button>
                             <button class="btn" onclick="player.options.massDis = (player.options.massDis + 1) % 4">Mass Format Display: <span id="mass_dis">Default</span></button>
-                            <button class="btn" onclick="enterBeta()">ENTER BETA</button>
                             <br><br>
                             <h2>Confirmation Settings</h2><br>
                             <div id="confirm_table" class="table_center"></div>
                             <br><br>
-                            Incremental Mass Rewritten: New Path Reloaded - v0.8 part 1 - made by Seder3214<br>
-                            Based on Incremental Mass Rewritten -  v0.7.0.1 - made by MrRedShark77<br>
+                            Incremental Mass Rewritten v0.7.1.6 - made by MrRedShark77<br>
                             The game is inspired by Distance Incremental & Synergism<br>
-                            Contributors: <span style="cursor: pointer;" onclick='addNotify(`frfrfr<br><img src="https://5.imimg.com/data5/HO/DK/MY-8155364/lemon-500x500.jpg" style="width:100%">`)'>Lemon</span>, 16777216 & Aarex (Artists)<br><br><br>
+                            Contributors: <span style="cursor: pointer;" onclick='addNotify(`where lemon<br><img src="https://i.imgflip.com/57cc98.jpg" style="width:100%">`)'>Bézier</span>, 16777216 & Aarex (Artists)<br><br><br>
                             Hint 1: Hover top image above tabs to show description...<br><br>
                             Total time played: <span id="total_time">X</span><br><br>
-                            
-                            <!-- <a href="https://www.easycounter.com/">
-                            <img src="https://www.easycounter.com/counter.php?mrredshark77"
-                            border="0" alt="error"></a> -->
-                        </div><div id="stab_frame11_1">
+
+                            <b>New!</b> Play the Chapter 0 prequel: <a href="http://mrredshark77.github.io/Pylon-of-the-Mass/" target="_newtab">Pylon of the Mass!</a>
+                        </div><div id="stab_frame9_1">
                             <div id="res_hider_table" class="table_center"></div>
-                         </div>
-<div style="position: absolute; bottom: 35px; right: 35px;"> 
-                             <img id="omega_badge" src="images/omega.png"> 
                         </div>
+
                         <div style="position: absolute; bottom: 35px; right: 35px;">
                             <img id="omega_badge" src="images/omega.png">
                         </div>
